@@ -1,0 +1,20 @@
+<div class="login shadow">
+  <h2>Регистрация</h2>
+
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :email, required: true, autofocus: true %>
+      <%= f.input :username, required: true %>
+      <%= f.input :password, label: 'Пароль', required: true, hint: ("#{@minimum_password_length} символов минимум" if @minimum_password_length) %>
+      <%= f.input :password_confirmation, label: 'Повторите пароль', required: true %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Зарегестрироваться" %>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+</div>

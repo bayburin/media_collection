@@ -1,0 +1,18 @@
+.login {
+  width: 450px;
+  margin: 200px auto 0;
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: white;
+
+  h2 {
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  .form-actions {
+    input {
+      margin: 0 auto;
+    }
+  }
+}

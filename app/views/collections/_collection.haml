@@ -1,0 +1,9 @@
+.collection.shadow
+  %h1= title_collection
+  - @collection.items.each do |col|
+    .block
+      .entry
+        = image_tag col.image.url(:medium)
+        %p= col.description
+        %p= link_to col.link, col.link, :target => "_blank"
+        .edit-line

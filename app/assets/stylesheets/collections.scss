@@ -1,0 +1,64 @@
+// input в navbar
+.input-group {
+  width: 270px;
+  padding: 8px;
+}
+
+// Оформление добавления/изменения данных коллекции
+h1 + .edit-block {
+  margin-top: 15px !important;
+}
+
+.edit-block {
+  width: 960px;
+  margin: 0 auto;
+
+  textarea {
+    resize: none;
+  }
+
+  .bottom {
+    border-top: 1px solid #ddd;
+    padding: 10px 0;
+  }
+
+  .inline {
+    float: left;
+    margin-right: 5px;
+  }
+}
+
+.cancel-edit {
+  margin-top: -10px;
+  margin-bottom: 10px !important;
+}
+
+// Оформление контента медиа-коллекции
+.collection {
+
+  .block {
+    min-height: 230px;
+    border-bottom: 1px solid #ddd;
+
+    .entry {
+      padding: 15px 19px;
+      min-height: 230px;
+
+      img {
+        position: absolute;
+      }
+
+      p, div.edit-line {
+        margin-left: 220px;
+
+        form, div {
+          display: inline;
+        }
+      }
+    }
+  }
+
+  .block :hover {
+    //background-color: #f8f8f8;
+  }
+}

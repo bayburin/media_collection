@@ -1,0 +1,12 @@
+.content.shadow
+  .collection
+    %h1 Ваша медиа-коллекция
+    - @collection.items.each do |col|
+      .block
+        .entry
+          = image_tag col.image.url(:medium)
+          %p= col.description
+          %p= link_to col.link, col.link, target: '_blank'
+          .edit-line
+            = button_to 'Редактировать', edit_collection_item_path(collection_id: @collection.id, id: col.id), method: :get, class: "btn-primary"
+            = button_to 'Удалить', collection_item_path(collection_id: @collection.id, id: col.id), method: :delete, data: { confirm: "Вы действительно хотите удалить пункт из коллекции?" }, class: "btn-danger"

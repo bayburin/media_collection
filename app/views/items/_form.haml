@@ -1,0 +1,11 @@
+.content.shadow
+  %h1.cente= content_title
+  .edit-block
+    = simple_form_for [@item] do |f|
+      = f.input :description, label: "Описание"
+      = f.input :link, label: "Ссылка"
+      = f.input :image, label: "Изображение", as: :file
+      .bottom
+        = f.button :submit, button_title, class: "btn-success inline"
+  = button_to "Отмена", root_path, method: :get, class: "btn-default cancel-edit"
+

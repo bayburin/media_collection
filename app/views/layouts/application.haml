@@ -15,9 +15,9 @@
             .nav-collapse
               %ul.nav.navbar-nav
                 %li{ class: "#{"active" if current_page?(root_path)}" }
-                  = link_to 'Просмотр', root_path
-                %li{ class: "#{"active" if current_page?(new_item_path(current_user.collection.id))}" }
-                  = link_to 'Добавить в коллекцию', new_item_path
+                  = link_to "Просмотр", root_path
+                %li{ class: "#{"active" if current_page?(new_item_path)}" }
+                  = link_to "Добавить в коллекцию", new_item_path
               %ul.nav.navbar-nav.pull-right
                 %li
                   = link_to "Выход", destroy_user_session_path, method: :delete

@@ -1,3 +1,12 @@
-%h1
-  Просмотр коллекции пользователя
-  = params[:username]
+.content.shadow
+  .collection
+    %h1
+      Просмотр коллекции пользователя
+      %strong= params[:username]
+    - @user.items.each do |col|
+      .block
+        .entry
+          = image_tag col.image.url(:medium)
+          %p= col.description
+          %p= link_to col.link, col.link, :target => "_blank"
+          .edit-line

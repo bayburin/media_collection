@@ -1,13 +1,13 @@
 development:
   adapter: postgresql
   database: media_dev
-  username: Andrey
-  password: rfhjcnf
+  username: pguser
+  password: pguser
   host: localhost
 
 test:
   adapter: postgresql
   database: media_test
-  username: Andrey
-  password: rfhjcnf
+  username: pguser
+  password: pguser
   host: localhost

@@ -1,13 +1,12 @@
 require 'rails_helper'
 
-describe User do
+RSpec.describe User, type: :model do
 
-  it "cuts out the name of the email address" do
-    user      = create(:user)
-    username  = user.username
-    domein    = user.email.match(/\w+(@.*)/)[1]
-
-    expect(username + domein).to eq (user.email)
+  context "when username parameter is valid" do
+    let(:user) { create(:user) }
+    it "return true" do
+      expect(user.valid?).to be true
+    end
   end
 
 end

@@ -18,7 +18,7 @@ h1 + .edit-block {
   }
 
   .bottom {
-    border-top: 1px solid #ddd;
+    border-top: $border;
     padding: 10px 0;
   }
 
@@ -38,7 +38,7 @@ h1 + .edit-block {
 
   .block {
     min-height: 230px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: $border;
 
     .entry {
       padding: 15px 19px;
@@ -56,9 +56,5 @@ h1 + .edit-block {
         }
       }
     }
-  }
-
-  .block :hover {
-    //background-color: #f8f8f8;
   }
 }

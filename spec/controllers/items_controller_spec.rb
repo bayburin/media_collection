@@ -2,63 +2,82 @@ require 'rails_helper'
 
 RSpec.describe ItemsController, type: :controller do
 
-  before(:each) do
-    @user         = create(:user)
-    @collection   = create(:collection, user_id: @user.id)
-    sign_in :user, @user
-  end
+  let(:user) { create(:user) }
+  before { sign_in :user, user }
 
   describe "#new" do
-    it "renders new page with form to create item" do
-      get :new, collection_id: @collection.id
-      expect(response).to render_template(:new)
+    before { subject }
+
+    context "when variable is created" do
+      subject { get :new }
+      it "renders new page" do
+        expect(response).to render_template(:new)
+      end
     end
   end
 
   describe "#create" do
-    it "redirects to user collection path after create item" do
-      post :create, collection_id: @collection.id, item: { description: "Тестовое описание", link: "http://test_url.ru" }
-      expect(response).to redirect_to(collections_path)
+    before { subject }
+
+    context "when item was created" do
+      let!(:item) { attributes_for(:item) }
+      subject { post :create, item: item }
+      it "redirects to root path" do
+        expect(response).to redirect_to(root_path)
+      end
     end
 
-    it "renders new page with form after failure create item" do
-      post :create, collection_id: @collection.id, item: { link: "http://test_url.ru" }
-      expect(response).to render_template(:new)
+    context "when item was not created" do
+      let!(:invalid_item) { attributes_for(:invalid_item) }
+      subject { post :create, item: invalid_item }
+      it "renders to new page again" do
+        expect(response).to render_template(:new)
+      end
     end
   end
 
   describe "#edit" do
-    it "renders edit page with form to edit item" do
-      item = create(:item, collection_id: @collection.id)
-      get :edit, collection_id: @collection.id, id: item.id
-      expect(response).to render_template(:edit)
-    end
+    before { subject }
 
-    it "render 404 page if item not found" do
-      get :edit, collection_id: @collection.id, id: 0
-      expect(response.status).to eq 404
+    context "when variable is created" do
+      let(:item) { create(:item, user_id: user.id) }
+      subject { get :edit, id: item.id }
+      it "renders edit page" do
+        expect(response).to render_template(:edit)
+      end
     end
   end
 
   describe "#update" do
-    it "redirects to user collection path after update item" do
-      item = create(:item, collection_id: @collection.id)
-      put :update, collection_id: @collection.id, id: item.id, item: { description: "Новое тестовое описание", link: "http://new_test_url.ru" }
-      expect(response).to redirect_to(collections_path)
+    before { subject }
+    let!(:item_old) { create(:item, user_id: user.id) }
+
+    context "when item was updated" do
+      let!(:item_new) { attributes_for(:item) }
+      subject { put :update, id: item_old.id, item: item_new }
+      it "redirects to root path" do
+        expect(response).to redirect_to(root_path)
+      end
     end
 
-    it "renders new page with form after failure update item" do
-      item = create(:item, collection_id: @collection.id)
-      put :update, collection_id: @collection.id, id: item.id, item: { description: "", link: "http://new_test_url.ru" }
-      expect(response).to render_template(:edit)
+    context "when item was not updated" do
+      let!(:invalid_item) { attributes_for(:invalid_item) }
+      subject { put :update, id: item_old, item: invalid_item}
+      it "renders to new page again" do
+        expect(response).to render_template(:edit)
+      end
     end
   end
 
   describe "#destroy" do
-    it "redirects to user collection path after destroy item" do
-      item = create(:item, collection_id: @collection.id)
-      delete :destroy, collection_id: @collection.id, id: item.id
-      expect(response).to redirect_to(collections_path)
+    before { subject }
+
+    context "when item was(or not was) destroyed" do
+      let(:item) { create(:item, user_id: user.id) }
+      subject { delete :destroy, id: item.id }
+      it "redirect to root_path" do
+        expect(response).to redirect_to(root_path)
+      end
     end
   end
 
